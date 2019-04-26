@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>脑图</title>
+        <style>
+            .brain-map-outer {
+                width: 800px;
+                height: 800px;
+                position: relative;
+            }
+
+            .brain-map-outer canvas {
+                position: absolute;
+            }
+
+            #backCanvas {
+                background: #000000;
+            }
+        </style>
+        <script>
+            var circles = [
+                {id: '1', x: 102, y: 213, radius: 10.5, fillStyle: "#fff"},
+                {id: '2', x: 85, y: 314, radius: 16.5, fillStyle: "#fff"},
+                {id: '3', x: 136, y: 384, radius: 10.5, fillStyle: "#fff"},
+                {id: '4', x: 190, y: 151, radius: 17, fillStyle: "#fff"},
+                {id: '5', x: 174, y: 252, radius: 10.5, fillStyle: "#fff"},
+                {id: '6', x: 205, y: 338, radius: 6.5, fillStyle: "#fff"},
+                {id: '7', x: 210, y: 431, radius: 6.5, fillStyle: "#fff"},
+                {id: '8', x: 314, y: 127, radius: 11, fillStyle: "#fff"},
+                {id: '9', x: 279, y: 179, radius: 6.5, fillStyle: "#fff"},
+                {id: '10', x: 280, y: 287, radius: 16.5, fillStyle: "#fff"},
+                {id: '11', x: 289, y: 393, radius: 16.5, fillStyle: "#fff"},
+                {id: '12', x: 429, y: 145, radius: 7.5, fillStyle: "#fff"},
+                {id: '13', x: 373, y: 179, radius: 16.5, fillStyle: "#fff"},
+                {id: '14', x: 357, y: 251, radius: 6.5, fillStyle: "#fff"},
+                {id: '15', x: 356, y: 324, radius: 10.5, fillStyle: "#fff"},
+                {id: '16', x: 364, y: 406, radius: 10.5, fillStyle: "#fff"},
+                {id: '17', x: 472, y: 182, radius: 6.5, fillStyle: "#fff"},
+                {id: '18', x: 461, y: 257, radius: 10.5, fillStyle: "#fff"},
+                {id: '19', x: 428, y: 327, radius: 16.5, fillStyle: "#fff"},
+                {id: '20', x: 456, y: 384, radius: 6.5, fillStyle: "#fff"},
+                {id: '21', x: 421, y: 427, radius: 6.5, fillStyle: "#fff"},
+                {id: '22', x: 535, y: 199, radius: 16.5, fillStyle: "#fff"},
+                {id: '23', x: 513, y: 304, radius: 6.5, fillStyle: "#fff"},
+                {id: '24', x: 517, y: 356, radius: 10.5, fillStyle: "#fff"},
+                {id: '25', x: 521, y: 422, radius: 16.5, fillStyle: "#fff"},
+                {id: '26', x: 582, y: 265, radius: 10.5, fillStyle: "#fff"},
+                {id: '27', x: 617, y: 306, radius: 6.5, fillStyle: "#fff"},
+                {id: '28', x: 598, y: 362, radius: 10.5, fillStyle: "#fff"},
+                {id: '29', x: 468, y: 452, radius: 10.5, fillStyle: "#fff"},
+                {id: '30', x: 452, y: 485, radius: 6.5, fillStyle: "#fff"},
+                {id: '31', x: 513, y: 469, radius: 6.5, fillStyle: "#fff"},
+                {id: '32', x: 485, y: 505, radius: 10.5, fillStyle: "#fff"},
+                {id: '33', x: 525, y: 522, radius: 10.5, fillStyle: "#fff"}
+            ];
+            var lines = [
+                {from: '1', to: '2', strokeStyle: "#ff0000"},
+                {from: '2', to: '3', strokeStyle: "#ff0000"},
+                {from: '1', to: '4', strokeStyle: "#ff0000"},
+                {from: '1', to: '5', strokeStyle: "#ff0000"},
+                {from: '2', to: '5', strokeStyle: "#ff0000"},
+                {from: '3', to: '5', strokeStyle: "#ff0000"},
+                {from: '4', to: '5', strokeStyle: "#ff0000"},
+                {from: '4', to: '9', strokeStyle: "#ff0000"},
+                {from: '3', to: '6', strokeStyle: "#ff0000"},
+                {from: '3', to: '7', strokeStyle: "#ff0000"},
+                {from: '5', to: '6', strokeStyle: "#ff0000"},
+                {from: '6', to: '7', strokeStyle: "#ff0000"},
+                {from: '6', to: '11', strokeStyle: "#ff0000"},
+                {from: '4', to: '8', strokeStyle: "#ff0000"},
+                {from: '8', to: '9', strokeStyle: "#ff0000"},
+                {from: '5', to: '9', strokeStyle: "#ff0000"},
+                {from: '5', to: '10', strokeStyle: "#ff0000"},
+                {from: '9', to: '10', strokeStyle: "#ff0000"},
+                {from: '6', to: '10', strokeStyle: "#ff0000"},
+                {from: '10', to: '11', strokeStyle: "#ff0000"},
+                {from: '7', to: '11', strokeStyle: "#ff0000"},
+                {from: '8', to: '12', strokeStyle: "#ff0000"},
+                {from: '8', to: '13', strokeStyle: "#ff0000"},
+                {from: '12', to: '13', strokeStyle: "#ff0000"},
+                {from: '9', to: '13', strokeStyle: "#ff0000"},
+                {from: '9', to: '14', strokeStyle: "#ff0000"},
+                {from: '13', to: '14', strokeStyle: "#ff0000"},
+                {from: '10', to: '14', strokeStyle: "#ff0000"},
+                {from: '10', to: '15', strokeStyle: "#ff0000"},
+                {from: '14', to: '15', strokeStyle: "#ff0000"},
+                {from: '11', to: '15', strokeStyle: "#ff0000"},
+                {from: '11', to: '16', strokeStyle: "#ff0000"},
+                {from: '15', to: '16', strokeStyle: "#ff0000"},
+                {from: '12', to: '17', strokeStyle: "#ff0000"},
+                {from: '13', to: '17', strokeStyle: "#ff0000"},
+                {from: '14', to: '18', strokeStyle: "#ff0000"},
+                {from: '17', to: '18', strokeStyle: "#ff0000"},
+                {from: '13', to: '18', strokeStyle: "#ff0000"},
+                {from: '18', to: '19', strokeStyle: "#ff0000"},
+                {from: '15', to: '19', strokeStyle: "#ff0000"},
+                {from: '14', to: '19', strokeStyle: "#ff0000"},
+                {from: '16', to: '19', strokeStyle: "#ff0000"},
+                {from: '19', to: '20', strokeStyle: "#ff0000"},
+                {from: '16', to: '20', strokeStyle: "#ff0000"},
+                {from: '16', to: '21', strokeStyle: "#ff0000"},
+                {from: '20', to: '21', strokeStyle: "#ff0000"},
+                {from: '17', to: '22', strokeStyle: "#ff0000"},
+                {from: '18', to: '22', strokeStyle: "#ff0000"},
+                {from: '22', to: '23', strokeStyle: "#ff0000"},
+                {from: '18', to: '23', strokeStyle: "#ff0000"},
+                {from: '19', to: '23', strokeStyle: "#ff0000"},
+                {from: '23', to: '24', strokeStyle: "#ff0000"},
+                {from: '20', to: '24', strokeStyle: "#ff0000"},
+                {from: '19', to: '24', strokeStyle: "#ff0000"},
+                {from: '24', to: '25', strokeStyle: "#ff0000"},
+                {from: '20', to: '25', strokeStyle: "#ff0000"},
+                {from: '20', to: '29', strokeStyle: "#ff0000"},
+                {from: '22', to: '26', strokeStyle: "#ff0000"},
+                {from: '23', to: '26', strokeStyle: "#ff0000"},
+                {from: '26', to: '27', strokeStyle: "#ff0000"},
+                {from: '27', to: '28', strokeStyle: "#ff0000"},
+                {from: '23', to: '27', strokeStyle: "#ff0000"},
+                {from: '24', to: '27', strokeStyle: "#ff0000"},
+                {from: '24', to: '28', strokeStyle: "#ff0000"},
+                {from: '25', to: '28', strokeStyle: "#ff0000"},
+                {from: '21', to: '29', strokeStyle: "#ff0000"},
+                {from: '25', to: '29', strokeStyle: "#ff0000"},
+                {from: '25', to: '31', strokeStyle: "#ff0000"},
+                {from: '29', to: '31', strokeStyle: "#ff0000"},
+                {from: '21', to: '30', strokeStyle: "#ff0000"},
+                {from: '29', to: '30', strokeStyle: "#ff0000"},
+                {from: '29', to: '32', strokeStyle: "#ff0000"},
+                {from: '30', to: '32', strokeStyle: "#ff0000"},
+                {from: '31', to: '32', strokeStyle: "#ff0000"},
+                {from: '31', to: '33', strokeStyle: "#ff0000"},
+                {from: '32', to: '33', strokeStyle: "#ff0000"},
+            ];
+            var stars = [
+                {r: 5, R: 12, x: 85, y: 314, rot: 30},
+                {r: 5, R: 12, x: 190, y: 151, rot: 30},
+                {r: 5, R: 12, x: 280, y: 287, rot: 30},
+                {r: 5, R: 12, x: 289, y: 393, rot: 30},
+                {r: 5, R: 12, x: 373, y: 179, rot: 30},
+                {r: 5, R: 12, x: 428, y: 327, rot: 30},
+                {r: 5, R: 12, x: 535, y: 199, rot: 30},
+                {r: 5, R: 12, x: 521, y: 422, rot: 30},
+                {r: 5, R: 12, x: 485, y: 505, rot: 30}
+            ];
+            // var paths = ['1', '2', '3', '5'];
+            // let start = circles.find(circle => circle.id === paths[0]);
+            // var fromIndex = 0;
+            // var toIndex = 1;
+            var backCanvas;
+            var backCtx;
+            var frontCanvas;
+            var frontCtx;
+
+            /**
+             * 绘制背景，圆和线
+             */
+            function drawBack() {
+                for (let i = 0; i < circles.length; i++) {
+                    let circle = circles[i];
+                    //画圆
+                    backCtx.beginPath();
+                    backCtx.fillStyle = circle.fillStyle;
+                    backCtx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+                    backCtx.fill();
+                    backCtx.closePath();
+                    //圆形内显示id
+                    // backCtx.beginPath();
+                    // backCtx.fillStyle = "red";
+                    // backCtx.font = "14px sans-serif";
+                    // backCtx.fillText(circle.id, circle.x - 4, circle.y + 4);//为了居中显示，4像素是假设文本的高宽是8像素，实际不一定。
+                    // backCtx.closePath();
+                }
+                backCtx.globalCompositeOperation = "destination-over";//在现有的画布内容后面绘制新的图形，线在圆下
+                for (let i = 0; i < lines.length; i++) {
+                    let line = lines[i];
+                    //划线
+                    let from = circles.find(circle => circle.id === line.from);
+                    let to = circles.find(circle => circle.id === line.to);
+                    backCtx.beginPath();
+                    backCtx.strokeStyle = line.strokeStyle;
+                    backCtx.moveTo(from.x, from.y);
+                    backCtx.lineTo(to.x, to.y);
+                    backCtx.stroke();
+                    backCtx.closePath();
+                }
+            }
+
+            function drawFront() {
+                for (let i = 0; i < stars.length; i++) {
+                    let star = stars[i];
+                    drawStar(frontCtx, star.r, star.R, star.x, star.y, star.rot)
+                }
+                window.requestAnimationFrame(drawFront);
+            }
+
+            /**
+             * 画五角星
+             * @param ctx
+             * @param r 内圆半径
+             * @param R 外圆半径
+             * @param x 圆心横坐标
+             * @param y 圆心纵坐标
+             * @param rot 旋转角度
+             */
+            function drawStar(ctx, r, R, x, y, rot) {
+                ctx.beginPath();
+                for (let i = 0; i < 5; i++) {
+                    ctx.lineTo(Math.cos((18 + i * 72 - rot) / 180 * Math.PI) * R + x,
+                        -Math.sin((18 + i * 72 - rot) / 180 * Math.PI) * R + y);
+                    ctx.lineTo(Math.cos((54 + i * 72 - rot) / 180 * Math.PI) * r + x,
+                        -Math.sin((54 + i * 72 - rot) / 180 * Math.PI) * r + y);
+                }
+                ctx.closePath();
+                // ctx.stroke();//不要边框
+                var gradient = ctx.createRadialGradient(x, y, R, x, y, 0);
+                gradient.addColorStop(0, "rgba(179,144,144,1)");
+                gradient.addColorStop(1, "white");
+                ctx.fillStyle = gradient;
+                ctx.fill();
+            }
+
+            // let ball = {
+            //     x: start.x, y: start.y,
+            //     radius: 5,
+            //     fillStyle: 'blue',
+            //     draw: function () {
+            //         frontCtx.beginPath();
+            //         frontCtx.fillStyle = this.fillStyle;
+            //         //阴影
+            //         frontCtx.shadowColor = 'yellow';
+            //         frontCtx.shadowOffsetX = 1;
+            //         frontCtx.shadowOffsetY = 1;
+            //         frontCtx.shadowBlur = 10;
+            //         frontCtx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+            //         frontCtx.fill();
+            //     }
+            // }
+            // function drawFront() {
+            //     //清空画布
+            //     frontCtx.clearRect(0, 0, frontCanvas.width, frontCanvas.height);
+            //     //重绘移动小球
+            //     ball.draw();
+            //     //计算小球下一帧的位置
+            //     let from = circles.find(circle => circle.id === paths[fromIndex]);
+            //     let to = circles.find(circle => circle.id === paths[toIndex]);
+            //     let step = 0.5;//斜边的步长
+            //     //斜边在x轴上的投影
+            //     let widthStep = calWidthStep(from.x, from.y, to.x, to.y, step);
+            //     if (to.x > from.x) {
+            //         ball.x += widthStep;
+            //     } else if (to.x < from.x) {
+            //         ball.x -= widthStep;
+            //     }
+            //     //斜边在y轴上的投影
+            //     let heightStep = calHeightStep(from.x, from.y, to.x, to.y, step);
+            //     if (to.y > from.y) {
+            //         ball.y += heightStep;
+            //     } else if (to.y < from.y) {
+            //         ball.y -= heightStep;
+            //     }
+            //     //计算移动边界
+            //     if (to.y > from.y) {//向下走
+            //         if (ball.y > to.y) {//超出边界
+            //             nextPath();
+            //         }
+            //     } else if (to.y < from.y) {//向上走
+            //         if (ball.y < to.y) {//超出边界
+            //             nextPath();
+            //         }
+            //     } else if (to.y === from.y) {
+            //         if (to.x > from.x) {//向右走
+            //             if (ball.x > to.x) {//超出边界
+            //                 nextPath();
+            //             }
+            //         } else if (to.x < from.x) {//向左走
+            //             if (ball.x < to.x) {//超出边界
+            //                 nextPath();
+            //             }
+            //         } else if (to.x === from.x) {//闭环
+            //             fromIndex = 0;
+            //             toIndex = 1;
+            //             ball.x = start.x;
+            //             ball.y = start.y;
+            //         }
+            //     }
+            //     window.requestAnimationFrame(drawFront);
+            // }
+            /**
+             * 改变参数以绘制下一个路径
+             */
+            // function nextPath() {
+            //     fromIndex++;
+            //     toIndex++;
+            //     if (toIndex === paths.length) {
+            //         toIndex = 0;
+            //     }
+            //     if (fromIndex === paths.length) {
+            //         fromIndex = 0;
+            //         //复原ball的初始位置
+            //         let from = circles.find(circle => circle.id === paths[fromIndex]);
+            //         ball.x = from.x;
+            //         ball.y = from.y;
+            //     }
+            // }
+            //
+            // /**
+            //  * 计算斜边step在x轴上的投影
+            //  */
+            // function calWidthStep(x1, y1, x2, y2, step) {
+            //     let dx = Math.abs(x2 - x1);
+            //     let dy = Math.abs(y2 - y1);
+            //     if (dx === 0) {
+            //         return 0;
+            //     }
+            //     if (dy === 0) {
+            //         return step;
+            //     }
+            //     let dz = Math.sqrt(dx * dx + dy * dy);//斜边
+            //     return dx * step / dz;
+            // }
+            //
+            // /**
+            //  * 计算斜边step在y轴上的投影
+            //  */
+            // function calHeightStep(x1, y1, x2, y2, step) {
+            //     let dx = Math.abs(x2 - x1);
+            //     let dy = Math.abs(y2 - y1);
+            //     if (dx === 0) {
+            //         return step;
+            //     }
+            //     if (dy === 0) {
+            //         return 0;
+            //     }
+            //     let dz = Math.sqrt(dx * dx + dy * dy);//斜边
+            //     return dy * step / dz;
+            // }
+            /**
+             * 页面加载完执行
+             */
+            function loaded() {
+                backCanvas = document.getElementById("backCanvas");
+                backCtx = backCanvas.getContext("2d");
+                frontCanvas = document.getElementById("frontCanvas");
+                frontCtx = frontCanvas.getContext("2d");
+                //绘制圆和线
+                drawBack();
+                window.requestAnimationFrame(drawFront);
+            }
+        </script>
+    </head>
+    <body onload="loaded()">
+        <div class="brain-map-outer">
+            <!--背景，包括圆和线，不重绘-->
+            <canvas id="backCanvas" width="800" height="800"></canvas>
+            <!--前景，移动物体，按帧重绘-->
+            <canvas id="frontCanvas" width="800" height="800"></canvas>
+        </div>
+    </body>
+</html>

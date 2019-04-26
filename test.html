@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>五角星</title>
+        <script>
+            /**
+             * 画五角星
+             * @param ctx
+             * @param r 内圆半径
+             * @param R 外圆半径
+             * @param x 圆心横坐标
+             * @param y 圆心纵坐标
+             * @param rot 旋转角度
+             */
+            function drawStar(ctx, r, R, x, y, rot) {
+                ctx.beginPath();
+                for (let i = 0; i < 5; i++) {
+                    ctx.lineTo(Math.cos((18 + i * 72 - rot) / 180 * Math.PI) * R + x,
+                        -Math.sin((18 + i * 72 - rot) / 180 * Math.PI) * R + y);
+                    ctx.lineTo(Math.cos((54 + i * 72 - rot) / 180 * Math.PI) * r + x,
+                        -Math.sin((54 + i * 72 - rot) / 180 * Math.PI) * r + y);
+                }
+                ctx.closePath();
+                // ctx.stroke();//不要边框
+                var gradient = ctx.createRadialGradient(x, y, R, x, y, 0);
+                gradient.addColorStop(0, "rgba(179,144,144,1)");
+                gradient.addColorStop(1, "white");
+                ctx.fillStyle = gradient;
+                ctx.fill();
+            }
+
+            function loaded() {
+                var canvas = document.getElementById("canvas");
+                var ctx = canvas.getContext("2d");
+                drawStar(ctx, 60, 200, 300, 300, 200)
+            }
+        </script>
+    </head>
+    <body onload="loaded()">
+        <canvas id="canvas" width="800" height="800" style="background: #000000;color: red;"></canvas>
+    </body>
+</html>
