@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>五角星</title>
+        <script src="./index.iife.js"></script>
         <script>
             /**
              * 画五角星
@@ -33,11 +34,154 @@
             function loaded() {
                 var canvas = document.getElementById("canvas");
                 var ctx = canvas.getContext("2d");
-                drawStar(ctx, 60, 200, 300, 300, 200)
+                // drawStar(ctx, 60, 200, 300, 300, 200);
+                var from = {x: 600, y: 100};
+                var to = {x: 1100, y: 400};
+                //光亮处的初始位置：三分之一处的坐标
+                var startX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3;
+                var startY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3;
+                //光亮处的初始位置：三分之二处的坐标
+                var endX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3 * 2;
+                var endY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3 * 2;
+                window.requestAnimationFrame(draw)
+
+                function draw() {
+                    // ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.beginPath();
+                    ctx.moveTo(from.x, from.y);
+                    ctx.lineTo(to.x, to.y);
+                    ctx.strokeStyle = "red";
+                    ctx.stroke();
+                    ctx.closePath();
+                    /*
+                    * 斜线方程 y = k*x + b
+                    * 代入两个点
+                    * y1 = k * x1 + b
+                    * y2 = k * x2 + b
+                    * 求k
+                    * y1 - y2 = k * (x1 - x2)
+                    * k = (y1 - y2) / (x1 - x2)
+                    * 求b
+                    * b = y1 - ((y1 - y2) / (x1 - x2)) * x1
+                    * b = y1 - (y1 * x1 - y2 * x1)/(x1 - x2)
+                    * b = (y1 * x1 - y1 * x2 - y1 * x1 + y2 * x1) /  (x1 - x2)
+                    * b = (y2 * x1 - y1 * x2) / (x1 - x2)
+                    */
+                    /*
+                    * 中点垂直斜线方程
+                    * 已知斜线方程为k，则垂直斜线斜率为-1 / k
+                    * k = -1 / ((y1 - y2) / (x1 - x2))
+                    * k = (x2 - x1) / (y1 - y2)
+                    * 中点坐标为x: (x1 + x2) / 2 y: (y1 + y2) / 2
+                    * 将中点带入方程
+                    * (y1 + y2) / 2 = (-1 / ((y1 - y2) / (x1 - x2))) *  ((x1 + x2) / 2) + b
+                    * (y1 + y2) / 2 = (-1 * (x1 - x2) / (y1 - y2)) *  ((x1 + x2) / 2) + b
+                    * b = (y1 + y2) / 2 - ((x2 - x1) / (y1 - y2)) *  ((x1 + x2) / 2)
+                    *
+                    * 假设距离为L，求点的坐标为x,y，已知点坐标为x0,y0，根据勾股定理可得如下一元二次方程
+                    * (y - y0)^2 + (x - x0)^2 = L^2
+                    * 联合中点垂直斜线的方程
+                    * y = kx + b
+                    * 代入y，得x的一元二次方程：(k^2+1)x^2+2[(b-y0)k-x0]x+[(b-y0)^2+x0^2-L^2]=0
+                    * 一元二次方程Ax^2+Bx+C=0中,
+                    * 一元二次方程求根公式：
+                    * 两根x1,x2= [-B±√(B^2-4AC)]/2A
+                    * */
+                    let k = (to.x - from.x) / (from.y - to.y);//k = (x2 - x1) / (y1 - y2)
+                    let b = (from.y + to.y) / 2 - ((to.x - from.x) / (from.y - to.y)) * ((from.x + to.x) / 2);//(y1 + y2) / 2 - ((x2 - x1) / (y1 - y2)) *  ((x1 + x2) / 2)
+                    let centerX = (startX + endX) / 2;
+                    let centerY = (startY + endY) / 2;
+                    let A = Math.pow(k, 2) + 1;//(k^2+1)
+                    let B = 2 * ((b - centerY) * k - centerX);// B=2[(b-y0)k-x0];
+                    let C = Math.pow(b - centerY, 2) + Math.pow(centerX, 2) - Math.pow(2, 2);// C=(b-y0)^2+x0^2-L^2
+                    let x1 = (-B + Math.sqrt(Math.pow(B, 2) - 4 * A * C)) / (2 * A);
+                    let x2 = (-B - Math.sqrt(Math.pow(B, 2) - 4 * A * C)) / (2 * A);
+                    let y1 = k * x1 + b;//y = kx + b
+                    let y2 = k * x2 + b;//y = kx + b
+                    ctx.beginPath();
+                    //从中点处向左右各偏移2像素，形成菱形
+                    ctx.moveTo(startX, startY);
+                    ctx.lineTo(x1, y1);
+                    ctx.lineTo(endX, endY);
+                    ctx.lineTo(x2, y2);
+                    ctx.lineTo(startX, startY);
+                    ctx.closePath();
+                    let gradient = ctx.createRadialGradient(startX, startY, 5, endX, endY, 5);
+                    gradient.addColorStop(0, "white");
+                    gradient.addColorStop(1, "white");
+                    ctx.fillStyle = gradient;
+                    ctx.fill();
+                    debugger
+                    //z轴移动step像素，计算投影
+                    let step = 1;
+                    //斜边step在x轴上的投影
+                    let widthStep = calWidthStep(from.x, from.y, to.x, to.y, step);
+                    if (to.x > from.x) {
+                        startX += widthStep;
+                        endX += widthStep;
+                    } else if (to.x < from.x) {
+                        startX -= widthStep;
+                        endX -= widthStep;
+                    }
+                    //斜边在y轴上的投影
+                    let heightStep = calHeightStep(from.x, from.y, to.x, to.y, step);
+                    if (to.y > from.y) {
+                        startY += heightStep;
+                        endY += heightStep;
+                    } else if (to.y < from.y) {
+                        startY -= heightStep;
+                        endY -= heightStep;
+                    }
+                    window.requestAnimationFrame(draw)
+                }
+            }
+
+            /**
+             * 计算斜边step在x轴上的投影
+             */
+            function calWidthStep(x1, y1, x2, y2, step) {
+                let dx = Math.abs(x2 - x1);
+                let dy = Math.abs(y2 - y1);
+                if (dx === 0) {
+                    return 0;
+                }
+                if (dy === 0) {
+                    return step;
+                }
+                let dz = Math.sqrt(dx * dx + dy * dy);//斜边
+                return dx * step / dz;
+            }
+
+            /**
+             * 计算斜边step在y轴上的投影
+             */
+            function calHeightStep(x1, y1, x2, y2, step) {
+                let dx = Math.abs(x2 - x1);
+                let dy = Math.abs(y2 - y1);
+                if (dx === 0) {
+                    return step;
+                }
+                if (dy === 0) {
+                    return 0;
+                }
+                let dz = Math.sqrt(dx * dx + dy * dy);//斜边
+                return dy * step / dz;
+            }
+
+            /**
+             *获取z轴上1/3和2/3处的坐标
+             * @param x1
+             * @param y1
+             * @param x2
+             * @param y2
+             */
+            function getZAxisPoint(x1, y1, x2, y2) {
+                let x = Math.min(x1, x2) + Math.abs(x1 - x2) / 3;
+                let y = Math.min(y1, y2) + Math.abs(y1 - y2) / 3;
             }
         </script>
     </head>
     <body onload="loaded()">
-        <canvas id="canvas" width="800" height="800" style="background: #000000;color: red;"></canvas>
+        <canvas id="canvas" width="1800" height="1800" style="background: #000000;color: red;"></canvas>
     </body>
 </html>
