@@ -15,138 +15,193 @@
             }
 
             #backCanvas {
-                background: #000000;
+                background: #ffffff;
             }
         </style>
         <script>
             var circles = [
-                {id: '1', x: 102, y: 213, radius: 10.5, fillStyle: "#fff"},
-                {id: '2', x: 85, y: 314, radius: 16.5, fillStyle: "#fff"},
-                {id: '3', x: 136, y: 384, radius: 10.5, fillStyle: "#fff"},
-                {id: '4', x: 190, y: 151, radius: 17, fillStyle: "#fff"},
-                {id: '5', x: 174, y: 252, radius: 10.5, fillStyle: "#fff"},
-                {id: '6', x: 205, y: 338, radius: 6.5, fillStyle: "#fff"},
-                {id: '7', x: 210, y: 431, radius: 6.5, fillStyle: "#fff"},
-                {id: '8', x: 314, y: 127, radius: 11, fillStyle: "#fff"},
-                {id: '9', x: 279, y: 179, radius: 6.5, fillStyle: "#fff"},
-                {id: '10', x: 280, y: 287, radius: 16.5, fillStyle: "#fff"},
-                {id: '11', x: 289, y: 393, radius: 16.5, fillStyle: "#fff"},
-                {id: '12', x: 429, y: 145, radius: 7.5, fillStyle: "#fff"},
-                {id: '13', x: 373, y: 179, radius: 16.5, fillStyle: "#fff"},
-                {id: '14', x: 357, y: 251, radius: 6.5, fillStyle: "#fff"},
-                {id: '15', x: 356, y: 324, radius: 10.5, fillStyle: "#fff"},
-                {id: '16', x: 364, y: 406, radius: 10.5, fillStyle: "#fff"},
-                {id: '17', x: 472, y: 182, radius: 6.5, fillStyle: "#fff"},
-                {id: '18', x: 461, y: 257, radius: 10.5, fillStyle: "#fff"},
-                {id: '19', x: 428, y: 327, radius: 16.5, fillStyle: "#fff"},
-                {id: '20', x: 456, y: 384, radius: 6.5, fillStyle: "#fff"},
-                {id: '21', x: 421, y: 427, radius: 6.5, fillStyle: "#fff"},
-                {id: '22', x: 535, y: 199, radius: 16.5, fillStyle: "#fff"},
-                {id: '23', x: 513, y: 304, radius: 6.5, fillStyle: "#fff"},
-                {id: '24', x: 517, y: 356, radius: 10.5, fillStyle: "#fff"},
-                {id: '25', x: 521, y: 422, radius: 16.5, fillStyle: "#fff"},
-                {id: '26', x: 582, y: 265, radius: 10.5, fillStyle: "#fff"},
-                {id: '27', x: 617, y: 306, radius: 6.5, fillStyle: "#fff"},
-                {id: '28', x: 598, y: 362, radius: 10.5, fillStyle: "#fff"},
-                {id: '29', x: 468, y: 452, radius: 10.5, fillStyle: "#fff"},
-                {id: '30', x: 452, y: 485, radius: 6.5, fillStyle: "#fff"},
-                {id: '31', x: 513, y: 469, radius: 6.5, fillStyle: "#fff"},
-                {id: '32', x: 485, y: 505, radius: 10.5, fillStyle: "#fff"},
-                {id: '33', x: 525, y: 522, radius: 10.5, fillStyle: "#fff"}
+                {id: '0', x: 102, y: 213, radius: 10.5, fillStyle: "#f7be39"},
+                {id: '1', x: 85, y: 314, radius: 16.5, fillStyle: "#f7be39"},
+                {id: '2', x: 136, y: 384, radius: 10.5, fillStyle: "#f7be39"},
+                {id: '3', x: 190, y: 151, radius: 17, fillStyle: "#f7be39"},
+                {id: '4', x: 174, y: 252, radius: 10.5, fillStyle: "#f7be39"},
+                {id: '5', x: 205, y: 338, radius: 6.5, fillStyle: "#f7be39"},
+                {id: '6', x: 210, y: 431, radius: 6.5, fillStyle: "#f7be39"},
+                {id: '7', x: 314, y: 127, radius: 11, fillStyle: "#f7be39"},
+                {id: '8', x: 279, y: 179, radius: 6.5, fillStyle: "#f7be39"},
+                {id: '9', x: 280, y: 287, radius: 16.5, fillStyle: "#f7be39"},
+                {id: '10', x: 289, y: 393, radius: 16.5, fillStyle: "#f7be39"},
+                {id: '11', x: 429, y: 145, radius: 7.5, fillStyle: "#f7be39"},
+                {id: '12', x: 373, y: 179, radius: 16.5, fillStyle: "#f7be39"},
+                {id: '13', x: 357, y: 251, radius: 6.5, fillStyle: "#f7be39"},
+                {id: '14', x: 356, y: 324, radius: 10.5, fillStyle: "#f7be39"},
+                {id: '15', x: 364, y: 406, radius: 10.5, fillStyle: "#f7be39"},
+                {id: '16', x: 472, y: 182, radius: 6.5, fillStyle: "#f7be39"},
+                {id: '17', x: 461, y: 257, radius: 10.5, fillStyle: "#f7be39"},
+                {id: '18', x: 428, y: 327, radius: 16.5, fillStyle: "#f53c59"},
+                {id: '19', x: 456, y: 384, radius: 6.5, fillStyle: "#f53c59"},
+                {id: '20', x: 421, y: 427, radius: 6.5, fillStyle: "#f53c59"},
+                {id: '21', x: 535, y: 199, radius: 16.5, fillStyle: "#f53c59"},
+                {id: '22', x: 513, y: 304, radius: 6.5, fillStyle: "#f53c59"},
+                {id: '23', x: 517, y: 356, radius: 10.5, fillStyle: "#f53c59"},
+                {id: '24', x: 521, y: 422, radius: 16.5, fillStyle: "#f53c59"},
+                {id: '25', x: 582, y: 265, radius: 10.5, fillStyle: "#f53c59"},
+                {id: '26', x: 617, y: 306, radius: 6.5, fillStyle: "#f53c59"},
+                {id: '27', x: 598, y: 362, radius: 10.5, fillStyle: "#f53c59"},
+                {id: '28', x: 468, y: 452, radius: 10.5, fillStyle: "#f53c59"},
+                {id: '29', x: 452, y: 485, radius: 6.5, fillStyle: "#f53c59"},
+                {id: '30', x: 513, y: 469, radius: 6.5, fillStyle: "#f53c59"},
+                {id: '31', x: 485, y: 505, radius: 10.5, fillStyle: "#f53c59"},
+                {id: '32', x: 525, y: 522, radius: 10.5, fillStyle: "#f53c59"}
             ];
             var lines = [
-                {from: '1', to: '2', strokeStyle: "#ff0000"},
-                {from: '2', to: '3', strokeStyle: "#ff0000"},
-                {from: '1', to: '4', strokeStyle: "#ff0000"},
-                {from: '1', to: '5', strokeStyle: "#ff0000"},
-                {from: '2', to: '5', strokeStyle: "#ff0000"},
-                {from: '3', to: '5', strokeStyle: "#ff0000"},
-                {from: '4', to: '5', strokeStyle: "#ff0000"},
-                {from: '4', to: '9', strokeStyle: "#ff0000"},
-                {from: '3', to: '6', strokeStyle: "#ff0000"},
-                {from: '3', to: '7', strokeStyle: "#ff0000"},
-                {from: '5', to: '6', strokeStyle: "#ff0000"},
-                {from: '6', to: '7', strokeStyle: "#ff0000"},
-                {from: '6', to: '11', strokeStyle: "#ff0000"},
-                {from: '4', to: '8', strokeStyle: "#ff0000"},
-                {from: '8', to: '9', strokeStyle: "#ff0000"},
-                {from: '5', to: '9', strokeStyle: "#ff0000"},
-                {from: '5', to: '10', strokeStyle: "#ff0000"},
-                {from: '9', to: '10', strokeStyle: "#ff0000"},
-                {from: '6', to: '10', strokeStyle: "#ff0000"},
-                {from: '10', to: '11', strokeStyle: "#ff0000"},
-                {from: '7', to: '11', strokeStyle: "#ff0000"},
-                {from: '8', to: '12', strokeStyle: "#ff0000"},
-                {from: '8', to: '13', strokeStyle: "#ff0000"},
-                {from: '12', to: '13', strokeStyle: "#ff0000"},
-                {from: '9', to: '13', strokeStyle: "#ff0000"},
-                {from: '9', to: '14', strokeStyle: "#ff0000"},
-                {from: '13', to: '14', strokeStyle: "#ff0000"},
-                {from: '10', to: '14', strokeStyle: "#ff0000"},
-                {from: '10', to: '15', strokeStyle: "#ff0000"},
-                {from: '14', to: '15', strokeStyle: "#ff0000"},
-                {from: '11', to: '15', strokeStyle: "#ff0000"},
-                {from: '11', to: '16', strokeStyle: "#ff0000"},
-                {from: '15', to: '16', strokeStyle: "#ff0000"},
-                {from: '12', to: '17', strokeStyle: "#ff0000"},
-                {from: '13', to: '17', strokeStyle: "#ff0000"},
-                {from: '14', to: '18', strokeStyle: "#ff0000"},
-                {from: '17', to: '18', strokeStyle: "#ff0000"},
-                {from: '13', to: '18', strokeStyle: "#ff0000"},
+                {from: '0', to: '1', strokeStyle: "#f8d34d"},
+                {from: '1', to: '2', strokeStyle: "#f8d34d"},
+                {from: '0', to: '3', strokeStyle: "#f8d34d"},
+                {from: '0', to: '4', strokeStyle: "#f8d34d"},
+                {from: '1', to: '4', strokeStyle: "#f8d34d"},
+                {from: '2', to: '4', strokeStyle: "#f8d34d"},
+                {from: '3', to: '4', strokeStyle: "#f8d34d"},
+                {from: '3', to: '8', strokeStyle: "#f8d34d"},
+                {from: '2', to: '5', strokeStyle: "#f8d34d"},
+                {from: '2', to: '6', strokeStyle: "#f8d34d"},
+                {from: '4', to: '5', strokeStyle: "#f8d34d"},
+                {from: '5', to: '6', strokeStyle: "#f8d34d"},
+                {from: '5', to: '10', strokeStyle: "#f8d34d"},
+                {from: '3', to: '7', strokeStyle: "#f8d34d"},
+                {from: '7', to: '8', strokeStyle: "#f8d34d"},
+                {from: '4', to: '8', strokeStyle: "#f8d34d"},
+                {from: '4', to: '9', strokeStyle: "#f8d34d"},
+                {from: '8', to: '9', strokeStyle: "#f8d34d"},
+                {from: '5', to: '9', strokeStyle: "#f8d34d"},
+                {from: '9', to: '10', strokeStyle: "#f8d34d"},
+                {from: '6', to: '10', strokeStyle: "#f8d34d"},
+                {from: '7', to: '11', strokeStyle: "#f8d34d"},
+                {from: '7', to: '12', strokeStyle: "#f8d34d"},
+                {from: '11', to: '12', strokeStyle: "#f8d34d"},
+                {from: '8', to: '12', strokeStyle: "#f8d34d"},
+                {from: '8', to: '13', strokeStyle: "#f8d34d"},
+                {from: '12', to: '13', strokeStyle: "#f8d34d"},
+                {from: '9', to: '13', strokeStyle: "#f8d34d"},
+                {from: '9', to: '14', strokeStyle: "#f8d34d"},
+                {from: '13', to: '14', strokeStyle: "#f8d34d"},
+                {from: '10', to: '14', strokeStyle: "#f8d34d"},
+                {from: '10', to: '15', strokeStyle: "#f8d34d"},
+                {from: '14', to: '15', strokeStyle: "#f8d34d"},
+                {from: '11', to: '16', strokeStyle: "#f8d34d"},
+                {from: '12', to: '16', strokeStyle: "#f8d34d"},
+                {from: '13', to: '17', strokeStyle: "#f8d34d"},
+                {from: '16', to: '17', strokeStyle: "#f8d34d"},
+                {from: '12', to: '17', strokeStyle: "#f8d34d"},
+                {from: '17', to: '18', strokeStyle: "#f8d34d"},
+                {from: '14', to: '18', strokeStyle: "#f8d34d"},
+                {from: '13', to: '18', strokeStyle: "#f8d34d"},
+                {from: '15', to: '18', strokeStyle: "#ff0000"},
                 {from: '18', to: '19', strokeStyle: "#ff0000"},
                 {from: '15', to: '19', strokeStyle: "#ff0000"},
-                {from: '14', to: '19', strokeStyle: "#ff0000"},
-                {from: '16', to: '19', strokeStyle: "#ff0000"},
+                {from: '15', to: '20', strokeStyle: "#ff0000"},
                 {from: '19', to: '20', strokeStyle: "#ff0000"},
-                {from: '16', to: '20', strokeStyle: "#ff0000"},
                 {from: '16', to: '21', strokeStyle: "#ff0000"},
-                {from: '20', to: '21', strokeStyle: "#ff0000"},
+                {from: '17', to: '21', strokeStyle: "#ff0000"},
+                {from: '21', to: '22', strokeStyle: "#ff0000"},
                 {from: '17', to: '22', strokeStyle: "#ff0000"},
                 {from: '18', to: '22', strokeStyle: "#ff0000"},
                 {from: '22', to: '23', strokeStyle: "#ff0000"},
-                {from: '18', to: '23', strokeStyle: "#ff0000"},
                 {from: '19', to: '23', strokeStyle: "#ff0000"},
+                {from: '18', to: '23', strokeStyle: "#ff0000"},
                 {from: '23', to: '24', strokeStyle: "#ff0000"},
-                {from: '20', to: '24', strokeStyle: "#ff0000"},
                 {from: '19', to: '24', strokeStyle: "#ff0000"},
-                {from: '24', to: '25', strokeStyle: "#ff0000"},
-                {from: '20', to: '25', strokeStyle: "#ff0000"},
-                {from: '20', to: '29', strokeStyle: "#ff0000"},
+                {from: '19', to: '28', strokeStyle: "#ff0000"},
+                {from: '21', to: '25', strokeStyle: "#ff0000"},
+                {from: '22', to: '25', strokeStyle: "#ff0000"},
+                {from: '25', to: '26', strokeStyle: "#ff0000"},
+                {from: '26', to: '27', strokeStyle: "#ff0000"},
                 {from: '22', to: '26', strokeStyle: "#ff0000"},
                 {from: '23', to: '26', strokeStyle: "#ff0000"},
-                {from: '26', to: '27', strokeStyle: "#ff0000"},
-                {from: '27', to: '28', strokeStyle: "#ff0000"},
                 {from: '23', to: '27', strokeStyle: "#ff0000"},
                 {from: '24', to: '27', strokeStyle: "#ff0000"},
+                {from: '20', to: '28', strokeStyle: "#ff0000"},
                 {from: '24', to: '28', strokeStyle: "#ff0000"},
-                {from: '25', to: '28', strokeStyle: "#ff0000"},
-                {from: '21', to: '29', strokeStyle: "#ff0000"},
-                {from: '25', to: '29', strokeStyle: "#ff0000"},
-                {from: '25', to: '31', strokeStyle: "#ff0000"},
+                {from: '24', to: '30', strokeStyle: "#ff0000"},
+                {from: '28', to: '30', strokeStyle: "#ff0000"},
+                {from: '20', to: '29', strokeStyle: "#ff0000"},
+                {from: '28', to: '29', strokeStyle: "#ff0000"},
+                {from: '28', to: '31', strokeStyle: "#ff0000"},
                 {from: '29', to: '31', strokeStyle: "#ff0000"},
-                {from: '21', to: '30', strokeStyle: "#ff0000"},
-                {from: '29', to: '30', strokeStyle: "#ff0000"},
-                {from: '29', to: '32', strokeStyle: "#ff0000"},
+                {from: '30', to: '31', strokeStyle: "#ff0000"},
                 {from: '30', to: '32', strokeStyle: "#ff0000"},
                 {from: '31', to: '32', strokeStyle: "#ff0000"},
-                {from: '31', to: '33', strokeStyle: "#ff0000"},
-                {from: '32', to: '33', strokeStyle: "#ff0000"},
             ];
-            var stars = [
-                {r: 5, R: 12, x: 85, y: 314, rot: 30},
-                {r: 5, R: 12, x: 190, y: 151, rot: 30},
-                {r: 5, R: 12, x: 280, y: 287, rot: 30},
-                {r: 5, R: 12, x: 289, y: 393, rot: 30},
-                {r: 5, R: 12, x: 373, y: 179, rot: 30},
-                {r: 5, R: 12, x: 428, y: 327, rot: 30},
-                {r: 5, R: 12, x: 535, y: 199, rot: 30},
-                {r: 5, R: 12, x: 521, y: 422, rot: 30},
-                {r: 5, R: 12, x: 485, y: 505, rot: 30}
+            var circleStars = [1, 3, 9, 10, 12, 18, 21, 24, 31];
+            var stars = [];
+            circleStars.forEach(i => {
+                stars.push({
+                    id: circles[i].id,
+                    r: circles[i].radius * 0.25, R: circles[i].radius * 0.7,
+                    x: circles[i].x, y: circles[i].y,
+                    rot: Math.random().toFixed(1) * 60, alpha: parseFloat(Math.random().toFixed(1)), alphaPlus: this.alpha !== 1,
+                    fillStyle: circles[i].fillStyle
+                })
+            })
+            var lightLines = [
+                {
+                    from: {
+                        x: circles[0].x, y: circles[0].y
+                    }, to: {
+                        x: circles[1].x, y: circles[1].y
+                    }
+                }, {
+                    from: {
+                        x: circles[4].x, y: circles[4].y
+                    }, to: {
+                        x: circles[9].x, y: circles[9].y
+                    }
+                }
             ];
-            // var paths = ['1', '2', '3', '5'];
-            // let start = circles.find(circle => circle.id === paths[0]);
-            // var fromIndex = 0;
-            // var toIndex = 1;
+            lightLines.forEach(line => {
+                let from = {x: line.from.x, y: line.from.y};
+                let to = {x: line.to.x, y: line.to.y};
+                //光亮处的初始位置：三分之一处的坐标
+                let startX;
+                let startY;
+                //光亮处的初始位置：三分之二处的坐标
+                let endX;
+                let endY;
+                if ((from.x < to.x && from.y < to.y) || (to.x < from.x && to.y < from.y)) {
+                    startX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3;
+                    startY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3;
+                    endX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3 * 2;
+                    endY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3 * 2;
+                }
+                if ((from.x > to.x && from.y < to.y) || (from.x < to.x && from.y > to.y)) {
+                    startX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3;
+                    startY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3 * 2;
+                    endX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3 * 2;
+                    endY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3;
+                }
+                if (from.x === to.x) {
+                    if (from.y === to.y) {
+                        console.log('点重合错误');
+                    }
+                    startX = from.x;//or startX = to.x
+                    startY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3;
+                    endX = from.x;//or endX = to.x
+                    endY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3 * 2;
+                }
+                if (from.y === to.y) {
+                    if (from.x === to.x) {
+                        console.log('点重合错误');
+                    }
+                    startX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3;
+                    startY = from.y;//or startY = to.y
+                    endX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3 * 2;
+                    endY = from.y;//or endY = to.y
+                }
+                line.startX = startX;
+                line.startY = startY;
+                line.endX = endX;
+                line.endY = endY;
+            });
             var backCanvas;
             var backCtx;
             var frontCanvas;
@@ -186,12 +241,160 @@
                 }
             }
 
+            var frame = 0;
+            var frameStep = 5;
+
             function drawFront() {
-                for (let i = 0; i < stars.length; i++) {
-                    let star = stars[i];
-                    drawStar(frontCtx, star.r, star.R, star.x, star.y, star.rot)
+                frame++;
+                //五角星闪烁
+                if (frame === frameStep) {
+                    frame = 0;
+                    //清空画布
+                    frontCtx.clearRect(0, 0, frontCanvas.width, frontCanvas.height);
+                    for (let i = 0; i < stars.length; i++) {
+                        let star = stars[i];
+                        drawStar(frontCtx, star.r, star.R, star.x, star.y, star.rot, star.alpha);
+                        if (star.alpha >= 1) {
+                            star.alphaPlus = false;
+                        } else if (star.alpha <= 0) {
+                            star.alphaPlus = true;
+                        }
+                        if (star.alphaPlus) {
+                            star.alpha += 0.1;
+                            star.alpha = parseFloat(star.alpha.toFixed(1))
+                        } else {
+                            star.alpha -= 0.1;
+                            star.alpha = parseFloat(star.alpha.toFixed(1))
+                        }
+                    }
                 }
+                frontCtx.clearRect(0, 0, frontCanvas.width, frontCanvas.height);
+                lightLines.forEach(line => {
+                    drawLightLine();
+
+                    function drawLightLine() {
+                        /*
+                        * 斜线方程
+                        *   y = k*x + b
+                        * 代入两个点
+                        *   y1 = k * x1 + b
+                        *   y2 = k * x2 + b
+                        * 求k
+                        *   y1 - y2 = k * (x1 - x2)
+                        *   k = (y1 - y2) / (x1 - x2)
+                        * 求b
+                        *   b = y1 - ((y1 - y2) / (x1 - x2)) * x1
+                        *   b = y1 - (y1 * x1 - y2 * x1)/(x1 - x2)
+                        *   b = (y1 * x1 - y1 * x2 - y1 * x1 + y2 * x1) /  (x1 - x2)
+                        *   b = (y2 * x1 - y1 * x2) / (x1 - x2)
+                        */
+                        /*
+                        * 中点垂直斜线方程
+                        * 已知斜线方程为k，则垂直斜线斜率为-1 / k
+                        *   k = -1 / ((y1 - y2) / (x1 - x2))
+                        *   k = (x2 - x1) / (y1 - y2)
+                        * 中点坐标为x: (x1 + x2) / 2 y: (y1 + y2) / 2
+                        * 将中点带入方程
+                        *   (y1 + y2) / 2 = (-1 / ((y1 - y2) / (x1 - x2))) *  ((x1 + x2) / 2) + b
+                        *   (y1 + y2) / 2 = (-1 * (x1 - x2) / (y1 - y2)) *  ((x1 + x2) / 2) + b
+                        *   (y1 + y2) / 2 = ((x2 - x1) / (y1 - y2)) *  ((x1 + x2) / 2) + b
+                        *   b = (y1 + y2) / 2 - ((x2 - x1) / (y1 - y2)) *  ((x1 + x2) / 2)
+                        *
+                        * 假设距离为L，求点的坐标为x,y，已知点坐标为x0,y0，根据勾股定理可得如下一元二次方程
+                        *   (y - y0)^2 + (x - x0)^2 = L^2
+                        * 联合中点垂直斜线的方程
+                        *   y = kx + b
+                        * 代入y，得x的一元二次方程：
+                        *   (k^2+1)x^2+2[(b-y0)k-x0]x+[(b-y0)^2+x0^2-L^2]=0
+                        * 一元二次方程Ax^2+Bx+C=0中,
+                        * 一元二次方程求根公式：
+                        *   x1,x2= [-B±√(B^2-4AC)]/2A
+                        * */
+                        let startX = line.startX;
+                        let startY = line.startY;
+                        let endX = line.endX;
+                        let endY = line.endY;
+                        let k = (endX - startX) / (startY - endY);//k = (x2 - x1) / (y1 - y2)
+                        let b = (startY + endY) / 2 - ((endX - startX) / (startY - endY)) * ((startX + endX) / 2);//(y1 + y2) / 2 - ((x2 - x1) / (y1 - y2)) *  ((x1 + x2) / 2)
+                        let centerX = (startX + endX) / 2;
+                        let centerY = (startY + endY) / 2;
+                        let A = Math.pow(k, 2) + 1;//(k^2+1)
+                        let B = 2 * ((b - centerY) * k - centerX);// B=2[(b-y0)k-x0];
+                        let L = 1;//向左右像素
+                        let C = Math.pow(b - centerY, 2) + Math.pow(centerX, 2) - Math.pow(L, 2);// C=(b-y0)^2+x0^2-L^2
+                        let x1 = (-B + Math.sqrt(Math.pow(B, 2) - 4 * A * C)) / (2 * A);
+                        let x2 = (-B - Math.sqrt(Math.pow(B, 2) - 4 * A * C)) / (2 * A);
+                        let y1 = k * x1 + b;//y = kx + b
+                        let y2 = k * x2 + b;//y = kx + b
+                        frontCtx.beginPath();
+                        //从中点处向左右各偏移L像素，形成菱形
+                        frontCtx.moveTo(startX, startY);
+                        frontCtx.lineTo(x1, y1);
+                        frontCtx.lineTo(endX, endY);
+                        frontCtx.lineTo(x2, y2);
+                        frontCtx.lineTo(startX, startY);
+                        frontCtx.closePath();
+                        let gradient = frontCtx.createRadialGradient(startX, startY, 5, endX, endY, 5);
+                        gradient.addColorStop(0, "red");
+                        gradient.addColorStop(1, "red");
+                        frontCtx.fillStyle = gradient;
+                        frontCtx.fill();
+                        // debugger
+                        //z轴移动step像素，计算投影
+                        let step = 0.1;
+                        //斜边step在x轴上的投影
+                        let widthStep = calWidthStep(line.from.x, line.from.y, line.to.x, line.to.y, step);
+                        if (line.to.x > line.from.x) {
+                            line.startX += widthStep;
+                            line.endX += widthStep;
+                        } else if (line.to.x < line.from.x) {
+                            line.startX -= widthStep;
+                            line.endX -= widthStep;
+                        }
+                        //斜边在y轴上的投影
+                        let heightStep = calHeightStep(line.from.x, line.from.y, line.to.x, line.to.y, step);
+                        if (line.to.y > line.from.y) {
+                            line.startY += heightStep;
+                            line.endY += heightStep;
+                        } else if (line.to.y < line.from.y) {
+                            line.startY -= heightStep;
+                            line.endY -= heightStep;
+                        }
+                    }
+                });
                 window.requestAnimationFrame(drawFront);
+            }
+
+            /**
+             * 计算斜边step在x轴上的投影
+             */
+            function calWidthStep(x1, y1, x2, y2, step) {
+                let dx = Math.abs(x2 - x1);
+                let dy = Math.abs(y2 - y1);
+                if (dx === 0) {
+                    return 0;
+                }
+                if (dy === 0) {
+                    return step;
+                }
+                let dz = Math.sqrt(dx * dx + dy * dy);//斜边
+                return dx * step / dz;
+            }
+
+            /**
+             * 计算斜边step在y轴上的投影
+             */
+            function calHeightStep(x1, y1, x2, y2, step) {
+                let dx = Math.abs(x2 - x1);
+                let dy = Math.abs(y2 - y1);
+                if (dx === 0) {
+                    return step;
+                }
+                if (dy === 0) {
+                    return 0;
+                }
+                let dz = Math.sqrt(dx * dx + dy * dy);//斜边
+                return dy * step / dz;
             }
 
             /**
@@ -202,8 +405,9 @@
              * @param x 圆心横坐标
              * @param y 圆心纵坐标
              * @param rot 旋转角度
+             * @param alpha 透明度
              */
-            function drawStar(ctx, r, R, x, y, rot) {
+            function drawStar(ctx, r, R, x, y, rot, alpha, fillStyle) {
                 ctx.beginPath();
                 for (let i = 0; i < 5; i++) {
                     ctx.lineTo(Math.cos((18 + i * 72 - rot) / 180 * Math.PI) * R + x,
@@ -213,128 +417,20 @@
                 }
                 ctx.closePath();
                 // ctx.stroke();//不要边框
-                var gradient = ctx.createRadialGradient(x, y, R, x, y, 0);
-                gradient.addColorStop(0, "rgba(179,144,144,1)");
+                let gradient = ctx.createRadialGradient(x, y, R, x, y, 0);
+                // let color = "rgba(" + Math.random() * 255 + ",10," + Math.random() * 255 + "," + alpha + ")";
+                let color = "rgba(255,255,255," + alpha + ")";
+                gradient.addColorStop(0, color)
                 gradient.addColorStop(1, "white");
-                ctx.fillStyle = gradient;
+                ctx.fillStyle = color;
+                //阴影
+                // ctx.shadowOffsetX = 1;
+                // ctx.shadowOffsetY = 1;
+                // ctx.shadowColor = color;
+                // ctx.shadowBlur = 1;
                 ctx.fill();
             }
 
-            // let ball = {
-            //     x: start.x, y: start.y,
-            //     radius: 5,
-            //     fillStyle: 'blue',
-            //     draw: function () {
-            //         frontCtx.beginPath();
-            //         frontCtx.fillStyle = this.fillStyle;
-            //         //阴影
-            //         frontCtx.shadowColor = 'yellow';
-            //         frontCtx.shadowOffsetX = 1;
-            //         frontCtx.shadowOffsetY = 1;
-            //         frontCtx.shadowBlur = 10;
-            //         frontCtx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-            //         frontCtx.fill();
-            //     }
-            // }
-            // function drawFront() {
-            //     //清空画布
-            //     frontCtx.clearRect(0, 0, frontCanvas.width, frontCanvas.height);
-            //     //重绘移动小球
-            //     ball.draw();
-            //     //计算小球下一帧的位置
-            //     let from = circles.find(circle => circle.id === paths[fromIndex]);
-            //     let to = circles.find(circle => circle.id === paths[toIndex]);
-            //     let step = 0.5;//斜边的步长
-            //     //斜边在x轴上的投影
-            //     let widthStep = calWidthStep(from.x, from.y, to.x, to.y, step);
-            //     if (to.x > from.x) {
-            //         ball.x += widthStep;
-            //     } else if (to.x < from.x) {
-            //         ball.x -= widthStep;
-            //     }
-            //     //斜边在y轴上的投影
-            //     let heightStep = calHeightStep(from.x, from.y, to.x, to.y, step);
-            //     if (to.y > from.y) {
-            //         ball.y += heightStep;
-            //     } else if (to.y < from.y) {
-            //         ball.y -= heightStep;
-            //     }
-            //     //计算移动边界
-            //     if (to.y > from.y) {//向下走
-            //         if (ball.y > to.y) {//超出边界
-            //             nextPath();
-            //         }
-            //     } else if (to.y < from.y) {//向上走
-            //         if (ball.y < to.y) {//超出边界
-            //             nextPath();
-            //         }
-            //     } else if (to.y === from.y) {
-            //         if (to.x > from.x) {//向右走
-            //             if (ball.x > to.x) {//超出边界
-            //                 nextPath();
-            //             }
-            //         } else if (to.x < from.x) {//向左走
-            //             if (ball.x < to.x) {//超出边界
-            //                 nextPath();
-            //             }
-            //         } else if (to.x === from.x) {//闭环
-            //             fromIndex = 0;
-            //             toIndex = 1;
-            //             ball.x = start.x;
-            //             ball.y = start.y;
-            //         }
-            //     }
-            //     window.requestAnimationFrame(drawFront);
-            // }
-            /**
-             * 改变参数以绘制下一个路径
-             */
-            // function nextPath() {
-            //     fromIndex++;
-            //     toIndex++;
-            //     if (toIndex === paths.length) {
-            //         toIndex = 0;
-            //     }
-            //     if (fromIndex === paths.length) {
-            //         fromIndex = 0;
-            //         //复原ball的初始位置
-            //         let from = circles.find(circle => circle.id === paths[fromIndex]);
-            //         ball.x = from.x;
-            //         ball.y = from.y;
-            //     }
-            // }
-            //
-            // /**
-            //  * 计算斜边step在x轴上的投影
-            //  */
-            // function calWidthStep(x1, y1, x2, y2, step) {
-            //     let dx = Math.abs(x2 - x1);
-            //     let dy = Math.abs(y2 - y1);
-            //     if (dx === 0) {
-            //         return 0;
-            //     }
-            //     if (dy === 0) {
-            //         return step;
-            //     }
-            //     let dz = Math.sqrt(dx * dx + dy * dy);//斜边
-            //     return dx * step / dz;
-            // }
-            //
-            // /**
-            //  * 计算斜边step在y轴上的投影
-            //  */
-            // function calHeightStep(x1, y1, x2, y2, step) {
-            //     let dx = Math.abs(x2 - x1);
-            //     let dy = Math.abs(y2 - y1);
-            //     if (dx === 0) {
-            //         return step;
-            //     }
-            //     if (dy === 0) {
-            //         return 0;
-            //     }
-            //     let dz = Math.sqrt(dx * dx + dy * dy);//斜边
-            //     return dy * step / dz;
-            // }
             /**
              * 页面加载完执行
              */
