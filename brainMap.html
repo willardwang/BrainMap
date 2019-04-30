@@ -4,10 +4,18 @@
         <meta charset="UTF-8">
         <title>脑图</title>
         <style>
+            .backImage {
+                width: 100%;
+                height: 800px;
+                background: url("./shutterstock_255446179.jpg") center no-repeat;
+            }
+
             .brain-map-outer {
                 width: 800px;
                 height: 800px;
-                position: relative;
+                position: absolute;
+                top: 0;
+                left: 0;
             }
 
             .brain-map-outer canvas {
@@ -15,122 +23,131 @@
             }
 
             #backCanvas {
-                background: #ffffff;
+                position: fixed;
+                top: 0;
+                right: 0;
+            }
+
+            #frontCanvas {
+                position: fixed;
+                top: 0;
+                right: 0;
             }
         </style>
+        <script src="vector.js"></script>
         <script>
             var circles = [
-                {id: '0', x: 102, y: 213, radius: 10.5, fillStyle: "#f7be39"},
-                {id: '1', x: 85, y: 314, radius: 16.5, fillStyle: "#f7be39"},
-                {id: '2', x: 136, y: 384, radius: 10.5, fillStyle: "#f7be39"},
-                {id: '3', x: 190, y: 151, radius: 17, fillStyle: "#f7be39"},
-                {id: '4', x: 174, y: 252, radius: 10.5, fillStyle: "#f7be39"},
-                {id: '5', x: 205, y: 338, radius: 6.5, fillStyle: "#f7be39"},
-                {id: '6', x: 210, y: 431, radius: 6.5, fillStyle: "#f7be39"},
-                {id: '7', x: 314, y: 127, radius: 11, fillStyle: "#f7be39"},
-                {id: '8', x: 279, y: 179, radius: 6.5, fillStyle: "#f7be39"},
-                {id: '9', x: 280, y: 287, radius: 16.5, fillStyle: "#f7be39"},
-                {id: '10', x: 289, y: 393, radius: 16.5, fillStyle: "#f7be39"},
-                {id: '11', x: 429, y: 145, radius: 7.5, fillStyle: "#f7be39"},
-                {id: '12', x: 373, y: 179, radius: 16.5, fillStyle: "#f7be39"},
-                {id: '13', x: 357, y: 251, radius: 6.5, fillStyle: "#f7be39"},
-                {id: '14', x: 356, y: 324, radius: 10.5, fillStyle: "#f7be39"},
-                {id: '15', x: 364, y: 406, radius: 10.5, fillStyle: "#f7be39"},
-                {id: '16', x: 472, y: 182, radius: 6.5, fillStyle: "#f7be39"},
-                {id: '17', x: 461, y: 257, radius: 10.5, fillStyle: "#f7be39"},
-                {id: '18', x: 428, y: 327, radius: 16.5, fillStyle: "#f53c59"},
-                {id: '19', x: 456, y: 384, radius: 6.5, fillStyle: "#f53c59"},
-                {id: '20', x: 421, y: 427, radius: 6.5, fillStyle: "#f53c59"},
-                {id: '21', x: 535, y: 199, radius: 16.5, fillStyle: "#f53c59"},
-                {id: '22', x: 513, y: 304, radius: 6.5, fillStyle: "#f53c59"},
-                {id: '23', x: 517, y: 356, radius: 10.5, fillStyle: "#f53c59"},
-                {id: '24', x: 521, y: 422, radius: 16.5, fillStyle: "#f53c59"},
-                {id: '25', x: 582, y: 265, radius: 10.5, fillStyle: "#f53c59"},
-                {id: '26', x: 617, y: 306, radius: 6.5, fillStyle: "#f53c59"},
-                {id: '27', x: 598, y: 362, radius: 10.5, fillStyle: "#f53c59"},
-                {id: '28', x: 468, y: 452, radius: 10.5, fillStyle: "#f53c59"},
-                {id: '29', x: 452, y: 485, radius: 6.5, fillStyle: "#f53c59"},
-                {id: '30', x: 513, y: 469, radius: 6.5, fillStyle: "#f53c59"},
-                {id: '31', x: 485, y: 505, radius: 10.5, fillStyle: "#f53c59"},
-                {id: '32', x: 525, y: 522, radius: 10.5, fillStyle: "#f53c59"}
+                {id: 0, x: 102, y: 213, radius: 10.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 1, x: 85, y: 314, radius: 16.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 2, x: 136, y: 384, radius: 10.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 3, x: 190, y: 151, radius: 17, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 4, x: 174, y: 252, radius: 10.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 5, x: 205, y: 338, radius: 6.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 6, x: 210, y: 431, radius: 6.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 7, x: 314, y: 127, radius: 11, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 8, x: 279, y: 179, radius: 6.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 9, x: 280, y: 287, radius: 16.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 10, x: 289, y: 393, radius: 16.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 11, x: 429, y: 145, radius: 7.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 12, x: 373, y: 179, radius: 16.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 13, x: 357, y: 251, radius: 6.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 14, x: 356, y: 324, radius: 10.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 15, x: 364, y: 406, radius: 10.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 16, x: 472, y: 182, radius: 6.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 17, x: 461, y: 257, radius: 10.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 18, x: 428, y: 327, radius: 16.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 19, x: 456, y: 384, radius: 6.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 20, x: 421, y: 427, radius: 6.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 21, x: 535, y: 199, radius: 16.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 22, x: 513, y: 304, radius: 6.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 23, x: 517, y: 356, radius: 10.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 24, x: 521, y: 422, radius: 16.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 25, x: 582, y: 265, radius: 10.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 26, x: 617, y: 306, radius: 6.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 27, x: 598, y: 362, radius: 10.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 28, x: 468, y: 452, radius: 10.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 29, x: 452, y: 485, radius: 6.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 30, x: 513, y: 469, radius: 6.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 31, x: 485, y: 505, radius: 10.5, fillStyle: "rgba(255,255,255,0.58)"},
+                {id: 32, x: 525, y: 522, radius: 10.5, fillStyle: "rgba(255,255,255,0.58)"}
             ];
             var lines = [
-                {from: '0', to: '1', strokeStyle: "#f8d34d"},
-                {from: '1', to: '2', strokeStyle: "#f8d34d"},
-                {from: '0', to: '3', strokeStyle: "#f8d34d"},
-                {from: '0', to: '4', strokeStyle: "#f8d34d"},
-                {from: '1', to: '4', strokeStyle: "#f8d34d"},
-                {from: '2', to: '4', strokeStyle: "#f8d34d"},
-                {from: '3', to: '4', strokeStyle: "#f8d34d"},
-                {from: '3', to: '8', strokeStyle: "#f8d34d"},
-                {from: '2', to: '5', strokeStyle: "#f8d34d"},
-                {from: '2', to: '6', strokeStyle: "#f8d34d"},
-                {from: '4', to: '5', strokeStyle: "#f8d34d"},
-                {from: '5', to: '6', strokeStyle: "#f8d34d"},
-                {from: '5', to: '10', strokeStyle: "#f8d34d"},
-                {from: '3', to: '7', strokeStyle: "#f8d34d"},
-                {from: '7', to: '8', strokeStyle: "#f8d34d"},
-                {from: '4', to: '8', strokeStyle: "#f8d34d"},
-                {from: '4', to: '9', strokeStyle: "#f8d34d"},
-                {from: '8', to: '9', strokeStyle: "#f8d34d"},
-                {from: '5', to: '9', strokeStyle: "#f8d34d"},
-                {from: '9', to: '10', strokeStyle: "#f8d34d"},
-                {from: '6', to: '10', strokeStyle: "#f8d34d"},
-                {from: '7', to: '11', strokeStyle: "#f8d34d"},
-                {from: '7', to: '12', strokeStyle: "#f8d34d"},
-                {from: '11', to: '12', strokeStyle: "#f8d34d"},
-                {from: '8', to: '12', strokeStyle: "#f8d34d"},
-                {from: '8', to: '13', strokeStyle: "#f8d34d"},
-                {from: '12', to: '13', strokeStyle: "#f8d34d"},
-                {from: '9', to: '13', strokeStyle: "#f8d34d"},
-                {from: '9', to: '14', strokeStyle: "#f8d34d"},
-                {from: '13', to: '14', strokeStyle: "#f8d34d"},
-                {from: '10', to: '14', strokeStyle: "#f8d34d"},
-                {from: '10', to: '15', strokeStyle: "#f8d34d"},
-                {from: '14', to: '15', strokeStyle: "#f8d34d"},
-                {from: '11', to: '16', strokeStyle: "#f8d34d"},
-                {from: '12', to: '16', strokeStyle: "#f8d34d"},
-                {from: '13', to: '17', strokeStyle: "#f8d34d"},
-                {from: '16', to: '17', strokeStyle: "#f8d34d"},
-                {from: '12', to: '17', strokeStyle: "#f8d34d"},
-                {from: '17', to: '18', strokeStyle: "#f8d34d"},
-                {from: '14', to: '18', strokeStyle: "#f8d34d"},
-                {from: '13', to: '18', strokeStyle: "#f8d34d"},
-                {from: '15', to: '18', strokeStyle: "#ff0000"},
-                {from: '18', to: '19', strokeStyle: "#ff0000"},
-                {from: '15', to: '19', strokeStyle: "#ff0000"},
-                {from: '15', to: '20', strokeStyle: "#ff0000"},
-                {from: '19', to: '20', strokeStyle: "#ff0000"},
-                {from: '16', to: '21', strokeStyle: "#ff0000"},
-                {from: '17', to: '21', strokeStyle: "#ff0000"},
-                {from: '21', to: '22', strokeStyle: "#ff0000"},
-                {from: '17', to: '22', strokeStyle: "#ff0000"},
-                {from: '18', to: '22', strokeStyle: "#ff0000"},
-                {from: '22', to: '23', strokeStyle: "#ff0000"},
-                {from: '19', to: '23', strokeStyle: "#ff0000"},
-                {from: '18', to: '23', strokeStyle: "#ff0000"},
-                {from: '23', to: '24', strokeStyle: "#ff0000"},
-                {from: '19', to: '24', strokeStyle: "#ff0000"},
-                {from: '19', to: '28', strokeStyle: "#ff0000"},
-                {from: '21', to: '25', strokeStyle: "#ff0000"},
-                {from: '22', to: '25', strokeStyle: "#ff0000"},
-                {from: '25', to: '26', strokeStyle: "#ff0000"},
-                {from: '26', to: '27', strokeStyle: "#ff0000"},
-                {from: '22', to: '26', strokeStyle: "#ff0000"},
-                {from: '23', to: '26', strokeStyle: "#ff0000"},
-                {from: '23', to: '27', strokeStyle: "#ff0000"},
-                {from: '24', to: '27', strokeStyle: "#ff0000"},
-                {from: '20', to: '28', strokeStyle: "#ff0000"},
-                {from: '24', to: '28', strokeStyle: "#ff0000"},
-                {from: '24', to: '30', strokeStyle: "#ff0000"},
-                {from: '28', to: '30', strokeStyle: "#ff0000"},
-                {from: '20', to: '29', strokeStyle: "#ff0000"},
-                {from: '28', to: '29', strokeStyle: "#ff0000"},
-                {from: '28', to: '31', strokeStyle: "#ff0000"},
-                {from: '29', to: '31', strokeStyle: "#ff0000"},
-                {from: '30', to: '31', strokeStyle: "#ff0000"},
-                {from: '30', to: '32', strokeStyle: "#ff0000"},
-                {from: '31', to: '32', strokeStyle: "#ff0000"},
+                {id: 0, from: 1, to: 0, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 1, from: 1, to: 2, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 2, from: 0, to: 3, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 3, from: 0, to: 4, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 4, from: 1, to: 4, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 5, from: 2, to: 4, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 6, from: 4, to: 3, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 7, from: 3, to: 8, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 8, from: 2, to: 5, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 9, from: 2, to: 6, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 10, from: 4, to: 5, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 11, from: 5, to: 6, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 12, from: 5, to: 10, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 13, from: 3, to: 7, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 14, from: 7, to: 8, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 15, from: 4, to: 8, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 16, from: 4, to: 9, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 17, from: 8, to: 9, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 18, from: 5, to: 9, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 19, from: 9, to: 10, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 20, from: 6, to: 10, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 21, from: 7, to: 11, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 22, from: 7, to: 12, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 23, from: 11, to: 12, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 24, from: 8, to: 12, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 25, from: 8, to: 13, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 26, from: 12, to: 13, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 27, from: 13, to: 9, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 28, from: 9, to: 14, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 29, from: 13, to: 14, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 30, from: 10, to: 14, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 31, from: 10, to: 15, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 32, from: 14, to: 15, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 33, from: 11, to: 16, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 34, from: 12, to: 16, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 35, from: 13, to: 17, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 36, from: 16, to: 17, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 37, from: 12, to: 17, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 38, from: 18, to: 17, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 39, from: 14, to: 18, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 40, from: 13, to: 18, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 41, from: 15, to: 18, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 42, from: 18, to: 19, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 43, from: 15, to: 19, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 44, from: 15, to: 20, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 45, from: 19, to: 20, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 46, from: 16, to: 21, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 47, from: 17, to: 21, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 48, from: 21, to: 22, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 49, from: 17, to: 22, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 50, from: 18, to: 22, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 51, from: 22, to: 23, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 52, from: 19, to: 23, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 53, from: 18, to: 23, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 54, from: 23, to: 24, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 55, from: 19, to: 24, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 56, from: 19, to: 28, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 57, from: 21, to: 25, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 58, from: 22, to: 25, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 59, from: 25, to: 26, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 60, from: 26, to: 27, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 61, from: 22, to: 26, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 62, from: 23, to: 26, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 63, from: 27, to: 23, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 64, from: 27, to: 24, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 65, from: 20, to: 28, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 66, from: 24, to: 28, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 67, from: 24, to: 30, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 68, from: 28, to: 30, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 69, from: 20, to: 29, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 70, from: 28, to: 29, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 71, from: 28, to: 31, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 72, from: 29, to: 31, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 73, from: 30, to: 31, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 74, from: 30, to: 32, strokeStyle: "rgba(255,255,255,0.58)"},
+                {id: 75, from: 31, to: 32, strokeStyle: "rgba(255,255,255,0.58)"},
             ];
             var circleStars = [1, 3, 9, 10, 12, 18, 21, 24, 31];
             var stars = [];
@@ -143,65 +160,6 @@
                     fillStyle: circles[i].fillStyle
                 })
             })
-            var lightLines = [
-                {
-                    from: {
-                        x: circles[0].x, y: circles[0].y
-                    }, to: {
-                        x: circles[1].x, y: circles[1].y
-                    }
-                }, {
-                    from: {
-                        x: circles[4].x, y: circles[4].y
-                    }, to: {
-                        x: circles[9].x, y: circles[9].y
-                    }
-                }
-            ];
-            lightLines.forEach(line => {
-                let from = {x: line.from.x, y: line.from.y};
-                let to = {x: line.to.x, y: line.to.y};
-                //光亮处的初始位置：三分之一处的坐标
-                let startX;
-                let startY;
-                //光亮处的初始位置：三分之二处的坐标
-                let endX;
-                let endY;
-                if ((from.x < to.x && from.y < to.y) || (to.x < from.x && to.y < from.y)) {
-                    startX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3;
-                    startY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3;
-                    endX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3 * 2;
-                    endY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3 * 2;
-                }
-                if ((from.x > to.x && from.y < to.y) || (from.x < to.x && from.y > to.y)) {
-                    startX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3;
-                    startY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3 * 2;
-                    endX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3 * 2;
-                    endY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3;
-                }
-                if (from.x === to.x) {
-                    if (from.y === to.y) {
-                        console.log('点重合错误');
-                    }
-                    startX = from.x;//or startX = to.x
-                    startY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3;
-                    endX = from.x;//or endX = to.x
-                    endY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3 * 2;
-                }
-                if (from.y === to.y) {
-                    if (from.x === to.x) {
-                        console.log('点重合错误');
-                    }
-                    startX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3;
-                    startY = from.y;//or startY = to.y
-                    endX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3 * 2;
-                    endY = from.y;//or endY = to.y
-                }
-                line.startX = startX;
-                line.startY = startY;
-                line.endX = endX;
-                line.endY = endY;
-            });
             var backCanvas;
             var backCtx;
             var frontCanvas;
@@ -223,26 +181,149 @@
                     // backCtx.beginPath();
                     // backCtx.fillStyle = "red";
                     // backCtx.font = "14px sans-serif";
-                    // backCtx.fillText(circle.id, circle.x - 4, circle.y + 4);//为了居中显示，4像素是假设文本的高宽是8像素，实际不一定。
+                    // backCtx.fillText(circle.id + '', circle.x - 4, circle.y + 4);//为了居中显示，4像素是假设文本的高宽是8像素，实际不一定。
                     // backCtx.closePath();
                 }
                 backCtx.globalCompositeOperation = "destination-over";//在现有的画布内容后面绘制新的图形，线在圆下
                 for (let i = 0; i < lines.length; i++) {
                     let line = lines[i];
-                    //划线
+                    //划线，由于圆形增加了透明度，所以globalCompositeOperation从视觉上不再有效，需要从圆和线的交点处划线而不是圆心处
                     let from = circles.find(circle => circle.id === line.from);
                     let to = circles.find(circle => circle.id === line.to);
                     backCtx.beginPath();
                     backCtx.strokeStyle = line.strokeStyle;
-                    backCtx.moveTo(from.x, from.y);
-                    backCtx.lineTo(to.x, to.y);
+                    backCtx.lineWidth = 2;
+                    //利用矢量计算交点的位置
+                    let fromOrigin = new Vector(from.x, from.y);
+                    let fromEndPoint = new Vector(to.x, to.y);
+                    let fromIntersect = findIntersect(fromOrigin, from.radius, fromEndPoint);
+                    //将交点坐标信息添加到line上，避免重复计算
+                    line.fromIntersectX = fromIntersect.x;
+                    line.fromIntersectY = fromIntersect.y;
+                    // backCtx.moveTo(from.x, from.y);
+                    backCtx.moveTo(fromIntersect.x, fromIntersect.y);
+                    let toOrigin = new Vector(to.x, to.y);
+                    let toEndPoint = new Vector(from.x, from.y);
+                    let toIntersect = findIntersect(toOrigin, to.radius, toEndPoint);
+                    //将交点坐标信息添加到circle上，避免重复计算
+                    line.toIntersectX = toIntersect.x;
+                    line.toIntersectY = toIntersect.y;
+                    // backCtx.lineTo(to.x, to.y);
+                    backCtx.lineTo(toIntersect.x, toIntersect.y);
                     backCtx.stroke();
                     backCtx.closePath();
+                    //线上显示id
+                    // backCtx.beginPath();
+                    // backCtx.fillStyle = "red";
+                    // backCtx.font = "18px sans-serif";
+                    // backCtx.fillText(line.id + '', ((from.x + to.x) / 2) - 4, ((from.y + to.y) / 2) + 4);
+                    // backCtx.closePath()
                 }
+            }
+
+            /**
+             * Finds the intersection between a circles border
+             * and a line from the origin to the otherLineEndPoint.
+             * @param {Vector} origin   - center of the circle and start of the line
+             * @param {number} radius   - radius of the circle
+             * @param {Vector} otherLineEndPoint - end of the line
+             * @return {Vector}     - point of the intersection
+             */
+            function findIntersect(origin, radius, otherLineEndPoint) {
+                let v = otherLineEndPoint.subtract(origin);
+                let lineLength = v.length();
+                if (lineLength === 0) throw new Error("Length has to be positive");
+                v = v.normalize();
+                return origin.add(v.multiplyScalar(radius));
             }
 
             var frame = 0;
             var frameStep = 5;
+            var lightLines = [
+                {id: 0}, {id: 2}, {id: 7}, {id: 24}, {id: 26}, {id: 27}, {id: 19}, {id: 31}, {id: 41}, {id: 38}, {id: 47}, {id: 57}, {id: 59},
+                {id: 60}, {id: 64}, {id: 67}, {id: 73}
+            ]
+            //line的状态 init：初始状态（长度为0）add：加长状态 keep:保持长度状态 subtract：减小长度状态 destroy覆灭状态（不再绘制）
+            const status_init = 'init';
+            const status_add = 'add';
+            const status_keep = 'keep';
+            const status_subtract = 'subtract';
+            const status_destroy = 'destroy';
+
+            function initLightLine(index) {//todo 合并initLines
+                //todo from和to和maxLength的计算拿出去，优化性能
+                let line = lines.find(l => l.id === lightLines[index].id);
+                let from = {x: line.fromIntersectX, y: line.fromIntersectY};
+                let to = {x: line.toIntersectX, y: line.toIntersectY};
+                let fromVector = new Vector(from.x, from.y);
+                let toVector = new Vector(to.x, to.y);
+                line.maxLength = fromVector.subtract(toVector).length() / 2;
+                //计算line的长度，规则：line从1变动到最大，此过程中start不变，end增加，到最大值为line的1/3后start和end一起增加
+                //start和end点均从start交点处出发，到end交点处结束
+                line.startX = line.fromIntersectX;
+                line.startY = line.fromIntersectY;
+                line.endX = line.fromIntersectX;
+                line.endY = line.fromIntersectY;
+                lightLines[index] = line;//改变数组的值
+            }
+
+            function initLines() {
+                lightLines.forEach((line, index, array) => {
+                    //todo from和to和maxLength的计算拿出去，优化性能
+                    line = lines.find(l => l.id === line.id);
+                    let from = {x: line.fromIntersectX, y: line.fromIntersectY};
+                    let to = {x: line.toIntersectX, y: line.toIntersectY};
+                    let fromVector = new Vector(from.x, from.y);
+                    let toVector = new Vector(to.x, to.y);
+                    line.maxLength = fromVector.subtract(toVector).length() / 2;
+                    //计算line的长度，规则：line从1变动到最大，此过程中start不变，end增加，到最大值为line的1/3后start和end一起增加
+                    //start和end点均从start交点处出发，到end交点处结束
+                    let startX = line.fromIntersectX;
+                    let startY = line.fromIntersectY;
+                    let endX = line.fromIntersectX;
+                    let endY = line.fromIntersectY;
+                    if (index === 0) {
+                        line.status = status_init;
+                    } else {
+                        line.status = status_destroy;
+                    }
+                    // if ((from.x < to.x && from.y < to.y) || (to.x < from.x && to.y < from.y)) {
+                    //     startX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3;
+                    //     startY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3;
+                    //     endX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3 * 2;
+                    //     endY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3 * 2;
+                    // }
+                    // if ((from.x > to.x && from.y < to.y) || (from.x < to.x && from.y > to.y)) {
+                    //     startX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3;
+                    //     startY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3 * 2;
+                    //     endX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3 * 2;
+                    //     endY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3;
+                    // }
+                    // if (from.x === to.x) {
+                    //     if (from.y === to.y) {
+                    //         console.log('点重合错误');
+                    //     }
+                    //     startX = from.x;//or startX = to.x
+                    //     startY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3;
+                    //     endX = from.x;//or endX = to.x
+                    //     endY = Math.min(from.y, to.y) + Math.abs(from.y - to.y) / 3 * 2;
+                    // }
+                    // if (from.y === to.y) {
+                    //     if (from.x === to.x) {
+                    //         console.log('点重合错误');
+                    //     }
+                    //     startX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3;
+                    //     startY = from.y;//or startY = to.y
+                    //     endX = Math.min(from.x, to.x) + Math.abs(from.x - to.x) / 3 * 2;
+                    //     endY = from.y;//or endY = to.y
+                    // }
+                    line.startX = startX;
+                    line.startY = startY;
+                    line.endX = endX;
+                    line.endY = endY;
+                    array[index] = line;//改变数组的值
+                });
+            }
 
             function drawFront() {
                 frame++;
@@ -269,25 +350,138 @@
                     }
                 }
                 frontCtx.clearRect(0, 0, frontCanvas.width, frontCanvas.height);
-                lightLines.forEach(line => {
+                lightLines.forEach((line, index, array) => {
                     drawLightLine();
 
                     function drawLightLine() {
-                        /*
-                        * 斜线方程
-                        *   y = k*x + b
-                        * 代入两个点
-                        *   y1 = k * x1 + b
-                        *   y2 = k * x2 + b
-                        * 求k
-                        *   y1 - y2 = k * (x1 - x2)
-                        *   k = (y1 - y2) / (x1 - x2)
-                        * 求b
-                        *   b = y1 - ((y1 - y2) / (x1 - x2)) * x1
-                        *   b = y1 - (y1 * x1 - y2 * x1)/(x1 - x2)
-                        *   b = (y1 * x1 - y1 * x2 - y1 * x1 + y2 * x1) /  (x1 - x2)
-                        *   b = (y2 * x1 - y1 * x2) / (x1 - x2)
-                        */
+                        if (line.status === status_destroy) {//line已经绘制一个生命周期，不再绘制，除非改变其status
+                            return;
+                        }
+                        //z轴移动step像素，计算投影
+                        let step = 1;
+                        //斜边step在x轴上的投影
+                        // if (line.id === 24) {
+                        //     debugger
+                        // }
+                        let widthStep = calWidthStep(line.fromIntersectX, line.fromIntersectY, line.toIntersectX, line.toIntersectY, step);
+                        //斜边在y轴上的投影
+                        let heightStep = calHeightStep(line.fromIntersectX, line.fromIntersectY, line.toIntersectX, line.toIntersectY, step);
+                        //计算长度
+                        let start = new Vector(line.startX, line.startY);
+                        let end = new Vector(line.endX, line.endY);
+                        let length = start.subtract(end).length();
+                        if (length >= line.maxLength || line.status === status_subtract) {//如果超过最大长度，或者是减小状态（判断减小状态是因为减小后就不超过最大长度了）
+                            //判断end是否已经移动到交点处
+                            let endInter = false;
+                            if (line.toIntersectX > line.fromIntersectX) {
+                                if (line.endX >= line.toIntersectX) {
+                                    endInter = true;
+                                }
+                            } else if (line.toIntersectX < line.fromIntersectX) {
+                                if (line.endX <= line.toIntersectX) {
+                                    endInter = true;
+                                }
+                            } else {
+                                if (line.toIntersectY > line.fromIntersectY) {
+                                    if (line.endY >= line.toIntersectY) {
+                                        endInter = true;
+                                    }
+                                } else if (line.toIntersectY < line.fromIntersectY) {
+                                    if (line.endY <= line.toIntersectY) {
+                                        endInter = true;
+                                    }
+                                } else {
+                                    console.error('开始交点和结束交点重合');
+                                }
+                            }
+                            if (endInter) {//如果end超过end交点，则只移动start
+                                line.status = status_subtract;
+                                //将下个line的状态设置为init以开始移动
+                                if (index === lightLines.length - 1) {
+                                    if (lightLines[0].status === status_destroy) {
+                                        initLightLine(0);//只设置坐标，不设置状态
+                                        lightLines[0].status = status_init;
+                                    }
+                                } else {
+                                    if (lightLines[index + 1].status === status_destroy) {
+                                        initLightLine(index + 1);//只设置坐标，不设置状态
+                                        lightLines[index + 1].status = status_init;
+                                    }
+                                }
+                                if (line.toIntersectX > line.fromIntersectX) {
+                                    line.startX += widthStep;
+                                } else if (line.toIntersectX < line.fromIntersectX) {
+                                    line.startX -= widthStep;
+                                } else {// line.toIntersectX === line.fromIntersectX
+                                }
+                                if (line.toIntersectY > line.fromIntersectY) {
+                                    line.startY += heightStep;
+                                } else if (line.toIntersectY < line.fromIntersectY) {
+                                    line.startY -= heightStep;
+                                } else {//line.toIntersectY === line.fromIntersectY
+                                }
+                                //如果start也超过end交点，则将line的状态设置为destroy不再绘制line
+                                //判断start是否已经移动到交点处
+                                let startInter = false;
+                                if (line.toIntersectX > line.fromIntersectX) {
+                                    if (line.startX >= line.toIntersectX) {
+                                        startInter = true;
+                                    }
+                                } else if (line.toIntersectX < line.fromIntersectX) {
+                                    if (line.startX <= line.toIntersectX) {
+                                        startInter = true;
+                                    }
+                                } else {
+                                    if (line.toIntersectY > line.fromIntersectY) {
+                                        if (line.startY >= line.toIntersectY) {
+                                            startInter = true;
+                                        }
+                                    } else if (line.toIntersectY < line.fromIntersectY) {
+                                        if (line.startY <= line.toIntersectY) {
+                                            startInter = true;
+                                        }
+                                    } else {
+                                        console.error('开始交点和结束交点重合');
+                                    }
+                                }
+                                if (startInter) {
+                                    line.status = status_destroy;
+                                }
+                            } else {//则start和end同时移动
+                                line.status = status_keep;
+                                if (line.toIntersectX > line.fromIntersectX) {
+                                    line.startX += widthStep;
+                                    line.endX += widthStep;
+                                } else if (line.toIntersectX < line.fromIntersectX) {
+                                    line.startX -= widthStep;
+                                    line.endX -= widthStep;
+                                } else {//line.toIntersectX === line.fromIntersectX
+                                }
+                                if (line.toIntersectY > line.fromIntersectY) {
+                                    line.startY += heightStep;
+                                    line.endY += heightStep;
+                                } else if (line.toIntersectY < line.fromIntersectY) {
+                                    line.startY -= heightStep;
+                                    line.endY -= heightStep;
+                                } else {//line.toIntersectY === line.fromIntersectY
+                                }
+                            }
+                        } else {//否则只移动end
+                            line.status = status_add;
+                            if (line.toIntersectX > line.fromIntersectX) {
+                                line.endX += widthStep;
+                            } else if (line.toIntersectX < line.fromIntersectX) {
+                                line.endX -= widthStep;
+                            } else {//line.toIntersectX === line.fromIntersectX
+                            }
+                            if (line.toIntersectY > line.fromIntersectY) {
+                                line.endY += heightStep;
+                            } else if (line.toIntersectY < line.fromIntersectY) {
+                                line.endY -= heightStep;
+                            } else {//line.toIntersectY === line.fromIntersectY
+                            }
+                        }
+                        array[index] = line;
                         /*
                         * 中点垂直斜线方程
                         * 已知斜线方程为k，则垂直斜线斜率为-1 / k
@@ -310,22 +504,48 @@
                         * 一元二次方程求根公式：
                         *   x1,x2= [-B±√(B^2-4AC)]/2A
                         * */
+                        /*
+                        * 斜线方程
+                        *   y = k*x + b
+                        * 代入两个点
+                        *   y1 = k * x1 + b
+                        *   y2 = k * x2 + b
+                        * 求k
+                        *   y1 - y2 = k * (x1 - x2)
+                        *   k = (y1 - y2) / (x1 - x2)
+                        * 求b
+                        *   b = y1 - ((y1 - y2) / (x1 - x2)) * x1
+                        *   b = y1 - (y1 * x1 - y2 * x1)/(x1 - x2)
+                        *   b = (y1 * x1 - y1 * x2 - y1 * x1 + y2 * x1) /  (x1 - x2)
+                        *   b = (y2 * x1 - y1 * x2) / (x1 - x2)
+                        */
                         let startX = line.startX;
                         let startY = line.startY;
                         let endX = line.endX;
                         let endY = line.endY;
-                        let k = (endX - startX) / (startY - endY);//k = (x2 - x1) / (y1 - y2)
-                        let b = (startY + endY) / 2 - ((endX - startX) / (startY - endY)) * ((startX + endX) / 2);//(y1 + y2) / 2 - ((x2 - x1) / (y1 - y2)) *  ((x1 + x2) / 2)
-                        let centerX = (startX + endX) / 2;
-                        let centerY = (startY + endY) / 2;
-                        let A = Math.pow(k, 2) + 1;//(k^2+1)
-                        let B = 2 * ((b - centerY) * k - centerX);// B=2[(b-y0)k-x0];
-                        let L = 1;//向左右像素
-                        let C = Math.pow(b - centerY, 2) + Math.pow(centerX, 2) - Math.pow(L, 2);// C=(b-y0)^2+x0^2-L^2
-                        let x1 = (-B + Math.sqrt(Math.pow(B, 2) - 4 * A * C)) / (2 * A);
-                        let x2 = (-B - Math.sqrt(Math.pow(B, 2) - 4 * A * C)) / (2 * A);
-                        let y1 = k * x1 + b;//y = kx + b
-                        let y2 = k * x2 + b;//y = kx + b
+                        let x1;
+                        let x2;
+                        let y1;//y = kx + b
+                        let y2;//y = kx + b
+                        let L = 1.8;// 垂直中线的偏移像素
+                        if (startY !== endY) {
+                            let k = (endX - startX) / (startY - endY);//k = (x2 - x1) / (y1 - y2)
+                            let b = (startY + endY) / 2 - ((endX - startX) / (startY - endY)) * ((startX + endX) / 2);//(y1 + y2) / 2 - ((x2 - x1) / (y1 - y2)) *  ((x1 + x2) / 2)
+                            let centerX = (startX + endX) / 2;
+                            let centerY = (startY + endY) / 2;
+                            let A = Math.pow(k, 2) + 1;//(k^2+1)
+                            let B = 2 * ((b - centerY) * k - centerX);// B=2[(b-y0)k-x0];
+                            let C = Math.pow(b - centerY, 2) + Math.pow(centerX, 2) - Math.pow(L, 2);// C=(b-y0)^2+x0^2-L^2
+                            x1 = (-B + Math.sqrt(Math.pow(B, 2) - 4 * A * C)) / (2 * A);
+                            x2 = (-B - Math.sqrt(Math.pow(B, 2) - 4 * A * C)) / (2 * A);
+                            y1 = k * x1 + b;//y = kx + b
+                            y2 = k * x2 + b;//y = kx + b
+                        } else {//如果是横线，此时斜率无穷大，需要单独计算
+                            x1 = (startX + endX) / 2;
+                            x2 = (startX + endX) / 2;
+                            y1 = startY - L;
+                            y2 = startY + L;
+                        }
                         frontCtx.beginPath();
                         //从中点处向左右各偏移L像素，形成菱形
                         frontCtx.moveTo(startX, startY);
@@ -335,31 +555,13 @@
                         frontCtx.lineTo(startX, startY);
                         frontCtx.closePath();
                         let gradient = frontCtx.createRadialGradient(startX, startY, 5, endX, endY, 5);
-                        gradient.addColorStop(0, "red");
-                        gradient.addColorStop(1, "red");
+                        // gradient.addColorStop(0, "#46a6ff");
+                        // gradient.addColorStop(0.5, "white");
+                        // gradient.addColorStop(1, "#46a6ff");
+                        gradient.addColorStop(0, "white");
+                        gradient.addColorStop(1, "white");
                         frontCtx.fillStyle = gradient;
                         frontCtx.fill();
-                        // debugger
-                        //z轴移动step像素，计算投影
-                        let step = 0.1;
-                        //斜边step在x轴上的投影
-                        let widthStep = calWidthStep(line.from.x, line.from.y, line.to.x, line.to.y, step);
-                        if (line.to.x > line.from.x) {
-                            line.startX += widthStep;
-                            line.endX += widthStep;
-                        } else if (line.to.x < line.from.x) {
-                            line.startX -= widthStep;
-                            line.endX -= widthStep;
-                        }
-                        //斜边在y轴上的投影
-                        let heightStep = calHeightStep(line.from.x, line.from.y, line.to.x, line.to.y, step);
-                        if (line.to.y > line.from.y) {
-                            line.startY += heightStep;
-                            line.endY += heightStep;
-                        } else if (line.to.y < line.from.y) {
-                            line.startY -= heightStep;
-                            line.endY -= heightStep;
-                        }
                     }
                 });
                 window.requestAnimationFrame(drawFront);
@@ -441,16 +643,18 @@
                 frontCtx = frontCanvas.getContext("2d");
                 //绘制圆和线
                 drawBack();
+                initLines();
                 window.requestAnimationFrame(drawFront);
             }
         </script>
     </head>
     <body onload="loaded()">
-        <div class="brain-map-outer">
-            <!--背景，包括圆和线，不重绘-->
-            <canvas id="backCanvas" width="800" height="800"></canvas>
-            <!--前景，移动物体，按帧重绘-->
-            <canvas id="frontCanvas" width="800" height="800"></canvas>
-        </div>
+        <div class="backImage"></div>
+        <!--<div class="brain-map-outer">-->
+        <!--背景，包括圆和线，不重绘-->
+        <canvas id="backCanvas" width="800" height="800"></canvas>
+        <!--前景，移动物体，按帧重绘-->
+        <canvas id="frontCanvas" width="800" height="800"></canvas>
+        <!--</div>-->
     </body>
 </html>
