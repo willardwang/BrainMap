@@ -4,6 +4,12 @@
         <meta charset="UTF-8">
         <title>脑图</title>
         <style>
+            html, body {
+                overflow: hidden;
+                margin: 0;
+                padding: 0;
+            }
+
             .backImage {
                 width: 100%;
                 height: 800px;
@@ -22,12 +28,16 @@
                 right: 0;
             }
         </style>
+        <!--使用babel兼容ie11-->
         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-        <script type="text/javascript" src="./node_modules/@babel/polyfill/dist/polyfill.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.4/polyfill.min.js"></script>
         <script src="./main.babel.js"></script>
         <script src="./vector.babel.js"></script>
+        <!--如果不用兼容ie，使用下方两个js即可，无需上方四个js-->
+        <!--<script src="./main.js"></script>-->
+        <!--<script src="./vector.js"></script>-->
         <script>
-            let circles1 = [
+            let circles = [
                 {id: 0, x: 102, y: 213, radius: 10.5, fillStyle: "rgba(255,255,255,0.58)"},
                 {id: 1, x: 85, y: 314, radius: 16.5, fillStyle: "rgba(255,255,255,0.58)"},
                 {id: 2, x: 136, y: 384, radius: 10.5, fillStyle: "rgba(255,255,255,0.58)"},
@@ -62,7 +72,7 @@
                 {id: 31, x: 485, y: 505, radius: 10.5, fillStyle: "rgba(255,255,255,0.58)"},
                 {id: 32, x: 525, y: 522, radius: 10.5, fillStyle: "rgba(255,255,255,0.58)"}
             ]
-            let lines1 = [
+            let lines = [
                 {id: 0, from: 1, to: 0, strokeStyle: "rgba(255,255,255,0.58)"},
                 {id: 1, from: 1, to: 2, strokeStyle: "rgba(255,255,255,0.58)"},
                 {id: 2, from: 0, to: 3, strokeStyle: "rgba(255,255,255,0.58)"},
@@ -140,7 +150,7 @@
                 {id: 74, from: 30, to: 32, strokeStyle: "rgba(255,255,255,0.58)"},
                 {id: 75, from: 31, to: 32, strokeStyle: "rgba(255,255,255,0.58)"},
             ]
-            let lightLines1 = [
+            let lightLines = [
                 {id: 0}, {id: 2}, {id: 7}, {id: 24}, {id: 26}, {id: 27}, {id: 19}, {id: 31}, {id: 41}, {id: 38}, {id: 47}, {id: 57}, {id: 59},
                 {id: 60}, {id: 64}, {id: 67}, {id: 73}
             ]
@@ -154,12 +164,12 @@
                 let frontCanvas = document.getElementById("frontCanvas")
                 let frontCtx = frontCanvas.getContext("2d")
                 //绘制背景
-                drawBackCanvas(backCtx, circles1, lines1)
+                drawBackCanvas(backCtx, circles, lines)
                 //初始化亮线
-                initLightLines(lightLines1, lines1)
+                initLightLines(lightLines, lines)
                 //按帧绘制前景
                 window.requestAnimationFrame(function () {
-                    drawFrontCanvas(frontCanvas, frontCtx, lightLines1, lines1)
+                    drawFrontCanvas(frontCanvas, frontCtx, lightLines, lines)
                 })
             }
         </script>
